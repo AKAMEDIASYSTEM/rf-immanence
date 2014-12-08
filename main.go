@@ -15,7 +15,7 @@ import (
 
 // scan a range of the spectrum, emitting the result periodically. This just wraps http://kmkeen.com/rtl-power/index.html
 func scan(outChan chan []byte, quitChan chan bool) {
-	cmd := exec.Command("/usr/local/bin/rtl_power", "-f", "118M:150M:8k", "-g", "50", "-i", "5")
+	cmd := exec.Command("/usr/local/bin/rtl_power", "-f", "88M:118M:8k", "-g", "50", "-i", "1")
 	stdout, _ := cmd.StdoutPipe()
 	if err := cmd.Start(); err != nil {
 		log.Fatal(err)
@@ -85,6 +85,7 @@ func scan(outChan chan []byte, quitChan chan bool) {
 				}
 				data = append(data, d...)
 				τ = t
+				log.Println(data)
 			case <-quitChan:
 				return
 			}
