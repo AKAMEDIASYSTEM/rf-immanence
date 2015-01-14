@@ -1,0 +1,9 @@
+[Unit]
+Description=AKA rf-immanence service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/rf-immanence/scripts/
+ExecStart=/usr/bin/python scan.py
+KillMode=process
+

@@ -15,7 +15,7 @@ import (
 
 // scan a range of the spectrum, emitting the result periodically. This just wraps http://kmkeen.com/rtl-power/index.html
 func scan(outChan chan []byte, quitChan chan bool) {
-	cmd := exec.Command("/usr/local/bin/rtl_power", "-f", "88M:118M:8k", "-g", "50", "-i", "1")
+	cmd := exec.Command("/usr/local/bin/rtl_power", "-f", "440M:485M:8k", "-g", "40", "-i", "1")
 	stdout, _ := cmd.StdoutPipe()
 	if err := cmd.Start(); err != nil {
 		log.Fatal(err)
@@ -61,7 +61,9 @@ func scan(outChan chan []byte, quitChan chan bool) {
 							max = value
 						}
 					}
-					scale := 255.0 / max
+					//scale := 255.0 / max
+					scale := 255.0 / 60 // hard-coded max to see if contrast can be improved
+					// (normalizing based on incoming samples from a time slice will never work well because bands that are xmitting will "drown out" weaker bands)
 					for i, _ := range data {
 						data[i] *= scale
 					}
@@ -73,6 +75,7 @@ func scan(outChan chan []byte, quitChan chan bool) {
 					outChan <- out
 					data = make([]float64, 0)
 					τ = t
+					log.Println(int(max),int(min), t)
 					break Concatenate
 				}
 				dstring := lineArray[7:]
@@ -85,7 +88,7 @@ func scan(outChan chan []byte, quitChan chan bool) {
 				}
 				data = append(data, d...)
 				τ = t
-				log.Println(data)
+				
 			case <-quitChan:
 				return
 			}

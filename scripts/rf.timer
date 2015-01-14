@@ -1,0 +1,11 @@
+[Unit]
+Description=AKA rf-immanence timer
+
+[Timer]
+OnBootSec=150
+OnUnitInactiveSec=5
+Unit=rf.service
+
+[Install]
+WantedBy=multi-user.target
+
