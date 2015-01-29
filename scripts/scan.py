@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 import time
+from subprocess import call
 
-ts = time.strftime("%Y%m%d-%H%M%S")
+ts = time.strftime("%Y-%m-%dt%H%M") # for filename
+call('rtl_power','-f 420M:500M:5k -i 1s -e 1h %s.csv' % ts)
+print 'done with %s' % ts
 
 
 '''
