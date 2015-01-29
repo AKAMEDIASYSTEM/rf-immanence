@@ -3,8 +3,8 @@ import time
 from subprocess import call
 
 ts = time.strftime("%Y-%m-%dt%H%M") # for filename
-command = '-f 420M:500M:5k -i 1s -e 1h '+ts+'.csv'
-call('rtl_power',command)
+command = 'rtl_power -f 420M:500M:5k -i 1s -e 1h '+ts+'.csv'
+call(command.split(), shell=False)
 print 'done with %s' % ts
 
 
