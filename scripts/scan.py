@@ -3,10 +3,17 @@ import time
 from subprocess import call
 
 ts = time.strftime("%Y-%m-%dt%H%M") # for filename
-command = 'rtl_power -f 420M:500M:5k -i 1s -e 1h '+ts+'.csv'
+command = 'rtl_power -f 420M:500M:5k -i 1s -e 10m '+ts+'.csv'
 call(command.split(), shell=False)
-print 'done with %s' % ts
+command2 = 'python heatmap.py '+ts+'.csv '+ts+'.png'
+call(command2.split(),shell=False)
 
+command3 = 'cp '+ts+'.png /media/usb0/rf-scans/'
+call(command3.split(),shell=False)
+# also duplicate so that the latest image is updated
+command4 = 'mv '+ts+'.png /media/usb0/rf-scans/latest.png'
+
+print 'done with %s' % ts
 
 '''
 formulate filename from datetime

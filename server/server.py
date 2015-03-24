@@ -18,13 +18,20 @@ settings = dict(
     debug=True
 )
 
+'''
+API - should take as query a date or date range (like, X mins into the past)
+should output json in a good format, i have no idea what that looks like
+
+rf-index - main browse-to page of rf-immanence, shows latest heatmap and some explanatory text
+
+
+
+'''
 application = tornado.web.Application([
-    (r"/api", ApiHandler),
+    (r"/api", ApiHandler),# this should serve out json scan results
     (r"/", BrowserHandler),
-    # (r"/api", APIHandler)
 ], db=db, **settings)
 
 if __name__ == "__main__":
-
     application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
