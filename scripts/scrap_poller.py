@@ -8,8 +8,9 @@ command = 'rtl_power -f 42M:1300M:5k -i 5s'
 print 'issuing command'
 d = check_output(command.split(), shell=False)
 d = d.split('\n')
-for g in d:
-    print 'now i see %s' % g
+print 'got a result'
+# for g in d:
+    # print 'now i see %s' % g
 # generate heatmap from output
 # command2 = 'python ~/rtl-sdr-misc/heatmap/heatmap.py '+ts+'.csv '+ts+'.png'
 # call(command2.split(),shell=False)
