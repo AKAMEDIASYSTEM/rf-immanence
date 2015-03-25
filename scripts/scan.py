@@ -12,7 +12,7 @@ command3 = 'cp '+ts+'.png /media/usb0/rf-scans/'
 call(command3.split(),shell=False)
 # also duplicate so that the latest image is updated
 command4 = 'mv '+ts+'.png /media/usb0/rf-scans/latest.png'
-
+call(command4.split(),shell=False)
 print 'done with %s' % ts
 
 '''
