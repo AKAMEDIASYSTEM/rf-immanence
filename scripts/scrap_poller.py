@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import time
 from subprocess import call
+from subprocess import check_output
 
 ts = time.strftime("%Y-%m-%dt%H%M") # for filename
 command = 'rtl_power -f 42M:1300M:5k -i 5s'
-d = call(command.split(), shell=False)
+d = check_output(command.split(), shell=False)
 print 'd is'
 print d
 # generate heatmap from output
