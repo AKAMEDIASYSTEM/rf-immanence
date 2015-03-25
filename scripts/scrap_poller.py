@@ -5,9 +5,10 @@ from subprocess import check_output
 
 ts = time.strftime("%Y-%m-%dt%H%M") # for filename
 command = 'rtl_power -f 42M:1300M:5k -i 5s'
-d = call(command.split(), shell=False)
-print 'd is'
-print d
+d = check_output(command.split(), shell=False)
+d = d.split('\n')
+for g in d:
+    print 'now i see %s' % g
 # generate heatmap from output
 # command2 = 'python ~/rtl-sdr-misc/heatmap/heatmap.py '+ts+'.csv '+ts+'.png'
 # call(command2.split(),shell=False)
