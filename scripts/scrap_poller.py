@@ -5,6 +5,7 @@ from subprocess import check_output
 
 ts = time.strftime("%Y-%m-%dt%H%M") # for filename
 command = 'rtl_power -f 42M:1300M:5k -i 5s'
+print 'issuing command'
 d = check_output(command.split(), shell=False)
 d = d.split('\n')
 for g in d:
